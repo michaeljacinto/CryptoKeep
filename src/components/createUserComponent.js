@@ -51,12 +51,22 @@ class CreateUser extends Component {
     });
   }
 
+  testAuth(e) {
+    e.preventDefault();
+
+    axios
+      .post("http://local:5000/users/add", this.state.username)
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Error: " + err));
+  }
+
   render() {
     return (
       <div>
         <br />
         <h2>Register</h2>
-        <form onSubmit={this.onSubmit}>
+        {/* <form onSubmit={this.onSubmit}> */}
+        <form>
           <div className="form-group">
             <br />
             <label>Username: </label>
@@ -75,9 +85,15 @@ class CreateUser extends Component {
               onChange={this.onChangePassword}
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <input type="submit" value="Register" className="btn btn-primary" />
-          </div>
+          </div> */}
+          <button onClick={this.onSubmit} className="btn btn-primary m-2">
+            Login
+          </button>
+          <button onClick={this.testAuth} className="btn btn-primary m-2">
+            Register
+          </button>
         </form>
       </div>
     );

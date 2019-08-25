@@ -1,7 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const frontPageRoute = require("./routes/frontPageRoute");
+const usersRoute = require("./routes/user.route");
+const config = require("config");
+
+if (!config.get("myprivatekey")) {
+  console.error("Private key is undefined");
+  process.exit(1);
+}
 
 // have environment variables in .env file
 require("dotenv").config();
@@ -26,7 +32,7 @@ connection.once("open", () => {
   console.log("MongoDB connection successful");
 });
 
-app.use("/users", frontPageRoute);
+app.use("/users", usersRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
