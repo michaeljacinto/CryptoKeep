@@ -1,12 +1,13 @@
 const router = require("express").Router();
-const { User, validateUser } = require("../models/userModel");
-const auth = require("../middleware/auth");
+const { User, validateUser } = require("../models/user.model");
+// const auth = require("../middleware/auth");
 const bcrypt = require("bcrypt");
-const express = require("express");
+// const express = require("express");
 
 router.route("/").get((req, res) => {
   User.find()
     .then(users => res.json(users))
+    // .then(() => res.send("hello world"))
     .catch(err => res.status(400).json("Error: " + err));
 });
 
@@ -40,12 +41,12 @@ router.post("/add", async (req, res) => {
     .then(() => res.json("New user added!"))
     .catch(err => res.status(400).json("Error creating user: " + err));
 
-  const token = user.generateAuthToken();
-  res.header("x-auth-token", token).send({
-    _id: user._id,
-    username: user.username,
-    password: user.password
-  });
+  // const token = user.generateAuthToken();
+  // res.header("x-auth-token", token).send({
+  //   _id: user._id,
+  //   username: user.username,
+  //   password: user.password
+  // });
 });
 
 module.exports = router;

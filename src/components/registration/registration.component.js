@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class CreateUser extends Component {
-  // state = {  }
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -43,62 +42,54 @@ class CreateUser extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log("Error: " + err));
 
-    // window.location = "/";
-
     this.setState({
       username: this.state.username,
       password: this.state.password
     });
   }
 
-  testAuth(e) {
-    e.preventDefault();
-
-    axios
-      .post("http://local:5000/users/add", this.state.username)
-      .then(res => console.log(res.data))
-      .catch(err => console.log("Error: " + err));
-  }
-
   render() {
     return (
-      <div>
-        <br />
-        <h2>Register</h2>
-        {/* <form onSubmit={this.onSubmit}> */}
-        <form>
-          <div className="form-group">
-            <br />
-            <label>Username: </label>
+      <div className="m-2 card">
+        <div className="card-header">Register</div>
+        <h5 className="m-2 card-title">Sign up below!</h5>
+        <div className="m-2 input-group mb-3">
+          <div className="input-group-prepend">
             <input
               type="text"
-              required
-              className="form-control m-2"
+              className="form-control"
+              placeholder="Username"
               value={this.state.username}
               onChange={this.onChangeUsername}
-            />
+            ></input>
+          </div>
+        </div>
+        <div className="m-2 input-group mb-3">
+          <div className="input-group-prepend">
             <input
               type="password"
-              required
-              className="form-control m-2"
+              className="form-control"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.onChangePassword}
-            />
+            ></input>
           </div>
-          {/* <div className="form-group">
-            <input type="submit" value="Register" className="btn btn-primary" />
-          </div> */}
-          <button onClick={this.onSubmit} className="btn btn-primary m-2">
-            Login
-          </button>
-          <button onClick={this.testAuth} className="btn btn-primary m-2">
-            Register
-          </button>
-        </form>
+        </div>
+        <div className="m-2 input-group mb-3">
+          <div className="input-group-prepend">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Confirm Password"
+            ></input>
+          </div>
+        </div>
+        <button onClick={this.onSubmit} className="btn btn-primary m-2">
+          Register
+        </button>
       </div>
     );
   }
 }
 
-export default CreateUser;
-// module.exports = router;
+export default Register;
