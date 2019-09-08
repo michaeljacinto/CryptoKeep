@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { User, validateUser } = require("../models/user.model");
 // const auth = require("../middleware/auth");
 const bcrypt = require("bcrypt");
+const db = require("../utils/utils");
+const _db = db.init();
 // const express = require("express");
 
 router.route("/").get((req, res) => {

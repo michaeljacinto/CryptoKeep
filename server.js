@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRouter = require("./src/routes/user.route");
+const utils = require("./src/utils/utils");
 
 // // have environment variables in .env file
 require("dotenv").config();
@@ -16,16 +17,15 @@ app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
 
+mongoose.Promise = global.Promise;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB connection successful");
-});
 
 app.use("/users", userRouter);
 
 app.listen(port, () => {
+  utils.init();
   console.log(`Server is running on port: ${port}`);
 });
 
